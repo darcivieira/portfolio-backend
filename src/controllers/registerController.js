@@ -11,13 +11,14 @@ module.exports = {
                 const plain_password = secrets.generateRandomPassword();
                 const password = secrets.createHashedPassword(plain_password)
                 const newBody = { ...body, password }
-                await User.create(newBody)
+                const user = await User.create(newBody)
                 response
                     .status(201)
-                    .json("Great! Your'll receive an e-mail with your password!")
+                    .json(user)
+                // .json("Great! Your'll receive an e-mail with your password!")
             } else {
                 response
-                    .status(401)
+                    .status(400)
                     .json("Sorry! You already have an account registred!")
             }
 

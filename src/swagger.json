@@ -1,0 +1,97 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Portfolio backend",
+    "summary": "A backend sample",
+    "description": "This is the Darci J Vieira Jr backend portfolio.",
+    "contact": {
+      "name": "API Support",
+      "url": "https://github.com/darcivieira",
+      "email": "darcivieira.junior@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "identifier": "Apache-2.0"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http:localhost:3000/api/v1",
+      "description": "Test API"
+    }
+  ],
+  "paths": {
+    "/register": {
+      "summary": "Register",
+      "description": "This endpoint enable you to register an account",
+      "post": {
+        "summary": "User registration",
+        "description": "This endpoint allows you to register your account.",
+        "tags": [
+          "Register"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "User already exists!"
+          },
+          "200": {
+            "description": "Success!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/RegisterResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegisterCreate": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
