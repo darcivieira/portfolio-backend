@@ -8,8 +8,9 @@ module.exports = {
             const userIsAlreadyCreated = await User.findOne({ where: { email: body.email } })
 
             if (!userIsAlreadyCreated) {
-                const plain_password = secrets.generateRandomPassword();
-                const password = secrets.createHashedPassword(plain_password)
+                // const plain_password = secrets.generateRandomPassword();
+                // const password = secrets.createHashedPassword(plain_password)
+                const password = secrets.createHashedPassword('a023007jr')
                 const newBody = { ...body, password }
                 const user = await User.create(newBody)
                 response
@@ -24,6 +25,14 @@ module.exports = {
 
         } catch (error) {
             response.status(400).send(error)
+        }
+    },
+    async list(request, response) {
+        try {
+            const users = await User.findAll()
+            response.status(200).json(users)
+        } catch (error) {
+            console.log(error);
         }
     }
 }
